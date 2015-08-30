@@ -1,0 +1,20 @@
+{
+  "name": "lambda-intercom",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {},
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "fs-extra": "^0.24.0",
+    "gulp": "^3.9.0",
+    "gulp-tsd": "0.0.4",
+    "gulp-typescript": "^2.8.1",
+    "gulp-zip": "^3.0.2",
+    "q": "^1.4.1",
+    "run-sequence": "^1.1.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.1.48"
+  }
+}
