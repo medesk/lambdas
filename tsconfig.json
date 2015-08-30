@@ -13,11 +13,14 @@
     },
     "filesGlob": [
         "./**/*.ts",
-        "!./**/*.d.ts",
+        "./**/*.d.ts",
         "!./node_modules/**/*",
         "!./typings/**/*"
     ],
     "files": [
-        "./src/main.ts"
+        "./src/aws-lambda.d.ts",
+        "./src/cfg.d.ts",
+        "./src/index.ts",
+        "./src/intercom-api.d.ts"
     ]
 }

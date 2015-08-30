@@ -2,3 +2,5 @@ node_modules/
 pkg/
 build/
 typings/
+config.json
+src/index.js

@@ -14,7 +14,8 @@ var DIR_PKG   = path.join(DIR_ROOT, "pkg")
 // AWS Lambda package
 var COPY = [
   [ path.join(DIR_ROOT, "node_modules", "q"), path.join(DIR_PKG, "node_modules", "q"), "dir" ],
-  [ path.join(DIR_ROOT, "build/src/main.js"), path.join(DIR_PKG, "main.js"), "file" ]
+  [ path.join(DIR_ROOT, "node_modules", "request-promise"), path.join(DIR_PKG, "node_modules", "request-promise"), "dir" ],
+  [ path.join(DIR_ROOT, "build/src/index.js"), path.join(DIR_PKG, "index.js"), "file" ]
 ]
 
 gulp.task("tsd", function (cb) {
