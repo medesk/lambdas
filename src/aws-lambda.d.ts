@@ -18,6 +18,6 @@ declare module Lambda {
     secret: string
     name: string
     email: string
-    tags: string[]
+    tags: string
   }
 }

@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "aws-sdk": "^2.1.48",
+    "es6-shim": "^0.33.3",
     "request-promise": "^0.4.3"
   }
 }

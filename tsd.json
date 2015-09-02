@@ -6,25 +6,25 @@
   "bundle": "typings/tsd.d.ts",
   "installed": {
     "aws-sdk/aws-sdk.d.ts": {
-      "commit": "d2bab5738b84b91d8ee18a68c7b379a9714cf82f"
+      "commit": "04a025ada3492a22df24ca2d8521c911697721b3"
     },
     "node/node.d.ts": {
-      "commit": "d2bab5738b84b91d8ee18a68c7b379a9714cf82f"
+      "commit": "04a025ada3492a22df24ca2d8521c911697721b3"
     },
     "q/Q.d.ts": {
-      "commit": "d2bab5738b84b91d8ee18a68c7b379a9714cf82f"
+      "commit": "04a025ada3492a22df24ca2d8521c911697721b3"
     },
     "request-promise/request-promise.d.ts": {
-      "commit": "d2bab5738b84b91d8ee18a68c7b379a9714cf82f"
+      "commit": "04a025ada3492a22df24ca2d8521c911697721b3"
     },
     "request/request.d.ts": {
-      "commit": "d2bab5738b84b91d8ee18a68c7b379a9714cf82f"
+      "commit": "04a025ada3492a22df24ca2d8521c911697721b3"
     },
     "form-data/form-data.d.ts": {
-      "commit": "d2bab5738b84b91d8ee18a68c7b379a9714cf82f"
+      "commit": "04a025ada3492a22df24ca2d8521c911697721b3"
     },
     "bluebird/bluebird.d.ts": {
-      "commit": "d2bab5738b84b91d8ee18a68c7b379a9714cf82f"
+      "commit": "04a025ada3492a22df24ca2d8521c911697721b3"
     }
   }
 }

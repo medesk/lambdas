@@ -1,5 +1,6 @@
 /// <reference path="../typings/tsd"/>
 /// <reference path="./aws-lambda"/>
+require("es6-shim")
 import http = require("http");
 import util = require("util");
 import Q = require("q");
@@ -17,14 +18,27 @@ interface Reason {
 }
 
 module.exports.intercomUserSync = function intercomUserSync(event: Lambda.IntercomUserSyncEvent, context: Lambda.Context) {
+    if(!isParams(event)){
+      context.fail("Invalid request body")
+      return
+    }
+
     var s3: S3Client = <any>new AWS.S3()
 
     getConfig(s3)
+        .then(v => validateRequest(v, event))
         .then(v => syncIntercomUser(v, event))
         .fail(e => context.fail(e))
         .done(v => context.succeed(v))
 }
 
+
+function validateRequest(cfg: Config, event: Lambda.IntercomUserSyncEvent): Q.Promise<Config> {
+  if(cfg.secret !== event.secret){
+    return Q.reject<Config>("Invalid request signature.")
+  }
+  return Q.when(cfg)
+}
 
 function syncIntercomUser(cfg: Config, event: Lambda.IntercomUserSyncEvent): Q.Promise<any> {
     if (!event.email) {
@@ -50,10 +64,8 @@ function syncIntercomUser(cfg: Config, event: Lambda.IntercomUserSyncEvent): Q.P
 
     // ---------------------
     function tagUser(user: Intercom.User): Q.Promise<any> {
-        var chain = Q.when()
-        for (let tag of event.tags) {
-            chain = chain.thenResolve(tag).then(addTagToUser)
-        }
+        var tags = event.tags.split('|').filter(v => v.length != 0)
+        var chain = tags.reduce((o, v) => o.thenResolve(v).then(addTagToUser), Q.when())
         // Запускаем цепь создания тэгов
         return chain.then(v => null)
 
@@ -77,7 +89,7 @@ function syncIntercomUser(cfg: Config, event: Lambda.IntercomUserSyncEvent): Q.P
                 simple: true
             }
 
-            return Q.when(request(opts)).then(v => console.log(v)).fail((e: Reason) => {
+            return Q.when(request(opts)).fail((e: Reason) => {
                 console.log("Error: Unable to call POST https://api.intercom.io/tags: %s", e.cause)
                 return Q.reject(e.cause)
             })
@@ -146,6 +158,17 @@ function syncIntercomUser(cfg: Config, event: Lambda.IntercomUserSyncEvent): Q.P
             return Q.reject(null)
         })
     }
+}
+
+function isParams(v): boolean {
+  var tv: Lambda.IntercomUserSyncEvent = v
+  if(typeof tv !== "object") return false
+  if(typeof tv.secret !== "string") return false
+  if(typeof tv.email !== "string") return false
+  if(tv.tags != null){
+    if(typeof tv.tags !== "string") return false
+  }
+  return true
 }
 
 /**
